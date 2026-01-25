@@ -79,7 +79,7 @@ export function DeveloperProfile() {
                 { name: "FastAPI", color: "bg-emerald-500 text-white" },
                 { name: "Machine Learning", color: "bg-purple-600 text-white" },
                 { name: "Tailwind", color: "bg-cyan-500 text-white" },
-                { name: "PostgreSQL", color: "bg-indigo-500 text-white" }
+               
               ].map((skill) => (
                 <Badge 
                   key={skill.name} 
