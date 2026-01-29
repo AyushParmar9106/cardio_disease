@@ -52,7 +52,7 @@ export function DiagnosticForm({ onPredictionComplete }: DiagnosticFormProps) {
     const [loading, setLoading] = useState(false)
 
     const form = useForm<z.infer<typeof formSchema>>({
-        resolver: zodResolver(formSchema),
+        resolver: zodResolver(formSchema) as any,
         defaultValues: {
             age: 50,
             gender: "1",
