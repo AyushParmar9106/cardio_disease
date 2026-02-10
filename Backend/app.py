@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import numpy as np
 import joblib
+import os
 
 # Page Configuration
 st.set_page_config(
@@ -14,8 +15,14 @@ st.set_page_config(
 @st.cache_resource
 def load_model_and_scaler():
     try:
-        model = joblib.load('cardio_model_final.pkl')
-        scaler = joblib.load('scaler.pkl')
+        # Get absolute path to the directory where this script is located
+        script_dir = os.path.dirname(os.path.abspath(__file__))
+        
+        model_path = os.path.join(script_dir, 'cardio_model_final.pkl')
+        scaler_path = os.path.join(script_dir, 'scaler.pkl')
+        
+        model = joblib.load(model_path)
+        scaler = joblib.load(scaler_path)
         return model, scaler
     except Exception as e:
         st.error(f"Error loading model/scaler: {e}")
