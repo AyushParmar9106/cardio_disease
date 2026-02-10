@@ -1,0 +1,23 @@
+# Exclude specific heavy files in Backend
+Backend/*.csv
+Backend/*.ipynb
+Backend/*.pdf
+Backend/*.png
+Backend/*.zip
+Backend/*.pkl
+!Backend/cardio_model_final.pkl
+!Backend/scaler.pkl
+
+# Exclude root heavy files if any
+*.csv
+*.ipynb
+*.pdf
+*.png
+
+# Git
+.git
+
+# Python Cache
+__pycache__
+*/__pycache__
+*.pyc

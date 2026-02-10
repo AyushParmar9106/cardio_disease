@@ -3,3 +3,5 @@ __pycache__/
 .next/
 venv/
 *.pyc
+.vercel
+.env*.local

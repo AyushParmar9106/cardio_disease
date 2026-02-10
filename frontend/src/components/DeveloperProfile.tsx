@@ -96,7 +96,7 @@ export function DeveloperProfile() {
             <div className="flex items-center justify-between p-4 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-slate-900 dark:to-indigo-950/30 rounded-2xl border border-blue-100 dark:border-blue-900/30">
               <div>
                 <p className="text-[10px] font-bold uppercase text-blue-500 tracking-widest">Placement Project</p>
-                <p className="text-sm font-bold text-slate-700 dark:text-slate-300">Final Semester 2026</p>
+                <p className="text-sm font-bold text-slate-700 dark:text-slate-300">6th Semester </p>
               </div>
               <a href="https://www.linkedin.com/in/ayush-parmar-1791972b5" target="_blank" rel="noopener noreferrer">
                 <Button size="sm" className="bg-blue-600 hover:bg-indigo-700 text-white rounded-xl px-5 shadow-lg shadow-blue-500/20 group">
