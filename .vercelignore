@@ -12,7 +12,7 @@ Backend/*.pkl
 *.csv
 *.ipynb
 *.pdf
-*.png
+
 
 # Git
 .git
