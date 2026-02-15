@@ -9,11 +9,11 @@ from utils import preprocess_input
 from fastapi.staticfiles import StaticFiles
 import os
 
-app = FastAPI(title="Cardio Risk API", version="1.0")
+app = FastAPI(title="Cardio Risk API", version="1.0", root_path="/api")
 
 # Mount the current directory to serve static chart images
-# We use os.getcwd() to serve files from the running directory (Backend)
-app.mount("/charts", StaticFiles(directory="."), name="charts")
+# We use os.path.dirname(__file__) to serve files from the running directory (api)
+app.mount("/charts", StaticFiles(directory=os.path.dirname(__file__)), name="charts")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,8 +24,13 @@ app.add_middleware(
 )
 
 try:
-    model = joblib.load('cardio_model_final.pkl')
-    scaler = joblib.load('scaler.pkl')
+    # Use relative path for Vercel deployment
+    base_dir = os.path.dirname(__file__)
+    model_path = os.path.join(base_dir, 'cardio_model_final.pkl')
+    scaler_path = os.path.join(base_dir, 'scaler.pkl')
+    
+    model = joblib.load(model_path)
+    scaler = joblib.load(scaler_path)
     print("Model and Scaler loaded successfully.")
 except Exception as e:
     print(f"Error loading model/scaler: {e}")
