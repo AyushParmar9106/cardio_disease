@@ -2,8 +2,6 @@ from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
-import pandas as pd
-import numpy as np
 from utils import preprocess_input
 
 from fastapi.staticfiles import StaticFiles
@@ -60,19 +58,39 @@ def predict_risk(data: PatientData):
         raise HTTPException(status_code=500, detail="Model not loaded.")
     
     input_data = data.dict()
-    df = pd.DataFrame([input_data])
     
-    df['age_years'] = df['age'] 
+    # Calculate derived features using standard Python
+    # df['age_years'] = df['age'] 
+    age_years = input_data['age']
     
-    df['bmi'] = df['weight'] / ((df['height'] / 100) ** 2)
+    # df['bmi'] = df['weight'] / ((df['height'] / 100) ** 2)
+    height_m = input_data['height'] / 100
+    bmi = input_data['weight'] / (height_m ** 2)
     
-    features = ['age_years', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo', 
-                'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'bmi']
+    # Feature order MUST match training
+    # features = ['age_years', 'gender', 'height', 'weight', 'ap_hi', 'ap_lo', 
+    #             'cholesterol', 'gluc', 'smoke', 'alco', 'active', 'bmi']
     
-    try:
-        X = df[features]
-    except KeyError as e:
-        raise HTTPException(status_code=400, detail=f"Missing feature: {e}")
+    # Create feature vector (list of values)
+    feature_vector = [
+        age_years,
+        input_data['gender'],
+        input_data['height'],
+        input_data['weight'],
+        input_data['ap_hi'],
+        input_data['ap_lo'],
+        input_data['cholesterol'],
+        input_data['gluc'],
+        input_data['smoke'],
+        input_data['alco'],
+        input_data['active'],
+        bmi
+    ]
+    
+    # Reshape for sklearn (1 sample, n features)
+    # X = df[features] -> became DataFrame
+    # We use numpy array or just list of lists
+    X = [feature_vector]
         
     X_scaled = scaler.transform(X)
     
@@ -83,7 +101,6 @@ def predict_risk(data: PatientData):
     risk_factors = []
     
     # 1. BMI Analysis
-    bmi = df['bmi'].values[0]
     if bmi > 30:
         risk_factors.append({"factor": "BMI", "value": f"{bmi:.1f}", "status": "Obese", "severity": "High"})
     elif bmi > 25:
@@ -98,7 +115,6 @@ def predict_risk(data: PatientData):
         risk_factors.append({"factor": "Blood Pressure", "value": f"{ap_hi}/{ap_lo}", "status": "Elevated", "severity": "Low"})
         
     # 3. Age Analysis
-    age_years = input_data['age']
     if age_years > 60:
         risk_factors.append({"factor": "Age", "value": f"{age_years}", "status": "Senior", "severity": "Medium"})
         
@@ -108,11 +124,11 @@ def predict_risk(data: PatientData):
     
     chol = input_data['cholesterol']
     if chol > 1:
-        risk_factors.append({"factor": "Cholesterol", "value": chol_map[chol], "status": "High Levels", "severity": "High" if chol == 3 else "Medium"})
+        risk_factors.append({"factor": "Cholesterol", "value": chol_map.get(chol, "Unknown"), "status": "High Levels", "severity": "High" if chol == 3 else "Medium"})
 
     gluc = input_data['gluc']
     if gluc > 1:
-        risk_factors.append({"factor": "Glucose", "value": gluc_map[gluc], "status": "High Levels", "severity": "High" if gluc == 3 else "Medium"})
+        risk_factors.append({"factor": "Glucose", "value": gluc_map.get(gluc, "Unknown"), "status": "High Levels", "severity": "High" if gluc == 3 else "Medium"})
         
     # 5. Lifestyle
     if input_data['smoke'] == 1:
