@@ -19,7 +19,7 @@ export function ModelInsights() {
     useEffect(() => {
         async function fetchModelInfo() {
             try {
-                const response = await axios.get("http://localhost:8000/model-info")
+                const response = await axios.get("/api/model-info")
                 setInfo(response.data)
             } catch (error) {
                 console.error("Failed to fetch model info:", error)

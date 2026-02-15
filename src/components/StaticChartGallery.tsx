@@ -68,7 +68,7 @@ export function StaticChartGallery() {
                                     </div>
                                     {/* Backend is running on port 8000, mounted at /charts */}
                                     <img
-                                        src={`http://localhost:8000/charts/${chart.filename}`}
+                                        src={`/charts/${chart.filename}`}
                                         alt={chart.title}
                                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                                         onError={(e) => {
@@ -93,7 +93,7 @@ export function StaticChartGallery() {
                         <DialogContent className="max-w-4xl w-full p-0 overflow-hidden bg-transparent border-none shadow-none">
                             <DialogTitle className="sr-only">{chart.title}</DialogTitle>
                             <img
-                                src={`http://localhost:8000/charts/${chart.filename}`}
+                                src={`/charts/${chart.filename}`}
                                 alt={chart.title}
                                 className="w-full h-auto rounded-lg shadow-2xl"
                             />
