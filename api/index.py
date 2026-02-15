@@ -3,14 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 import joblib
 
-from fastapi.staticfiles import StaticFiles
 import os
 
 app = FastAPI(title="Cardio Risk API", version="1.0", root_path="/api")
-
-# Mount the current directory to serve static chart images
-# We use os.path.dirname(__file__) to serve files from the running directory (api)
-app.mount("/charts", StaticFiles(directory=os.path.dirname(__file__)), name="charts")
 
 app.add_middleware(
     CORSMiddleware,
