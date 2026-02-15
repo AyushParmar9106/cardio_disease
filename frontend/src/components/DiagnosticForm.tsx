@@ -87,7 +87,7 @@ export function DiagnosticForm({ onPredictionComplete }: DiagnosticFormProps) {
                 active: values.active ? 1 : 0,
             }
 
-            const response = await axios.post("http://localhost:8000/predict", payload)
+            const response = await axios.post("/api/predict", payload)
             onPredictionComplete(response.data)
         } catch (error) {
             console.error("Error submitting form:", error)

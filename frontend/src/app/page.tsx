@@ -41,7 +41,7 @@ export default function Home() {
       {/* Main Tabs Layout */}
       <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
         <div className="flex justify-center mb-8">
-          <TabsList className="grid w-full max-w-[800px] grid-cols-2 md:grid-cols-5 h-auto">
+          <TabsList className="flex flex-wrap justify-center w-full max-w-[800px] h-auto gap-1">
             <TabsTrigger value="intro">Intro</TabsTrigger>
             <TabsTrigger value="predict">Predict</TabsTrigger>
             <TabsTrigger value="analysis">Analysis</TabsTrigger>
