@@ -4,8 +4,8 @@ An advanced full-stack application using **Next.js** for the frontend and **Fast
 
 ## Project Structure
 
-- **Frontend**: Next.js application (React, TailwindCSS, Shadcn UI)
-- **Backend**: FastAPI server (Python, Scikit-Learn, Pandas)
+- **root**: Next.js application (Frontend)
+- **api/**: FastAPI server (Backend)
 
 ## 🚀 How to Run Locally
 
@@ -13,31 +13,23 @@ You must run the Frontend and Backend separately in two different terminals.
 
 ### 1. Start the Backend (FastAPI)
 
-1. Open a terminal and navigate to the `Backend` directory:
+1. Open a terminal (in the project root) and install dependencies:
    ```bash
-   cd Backend
+   pip install -r api/requirements.txt
    ```
-2. Install dependencies (if not already installed):
+2. Run the server:
    ```bash
-   pip install -r requirements.txt
+   python api/index.py
    ```
-3. Run the server:
-   ```bash
-   python -m uvicorn api:app --reload --port 8000
-   ```
-   The backend will start at `http://localhost:8000`.
+   The backend will start at `http://0.0.0.0:8000`.
 
 ### 2. Start the Frontend (Next.js)
 
-1. Open a **new** terminal and navigate to the `Frontend` directory:
-   ```bash
-   cd Frontend
-   ```
-2. Install dependencies (if not already installed):
+1. Open a **new** terminal (in the project root) and install dependencies:
    ```bash
    npm install
    ```
-3. Run the development server:
+2. Run the development server:
    ```bash
    npm run dev
    ```
