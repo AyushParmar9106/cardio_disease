@@ -47,7 +47,7 @@ export function ProjectIntro() {
                     An advanced diagnostic tool leveraging Random Forest algorithms to assess heart health in real-time.
                 </p>
                 <p className="text-sm text-gray-500">
-                    Final Semester Placement Project • 2026
+
                 </p>
             </div>
         </div>
