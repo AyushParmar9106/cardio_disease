@@ -2,7 +2,7 @@
 
 An advanced full-stack application using **Next.js** for the frontend and **FastAPI** with **Scikit-Learn** for the backend to predict cardiovascular disease risk.
     
-**Live Demo:** [https://cardio-disease-ap91.vercel.app/](https://cardio-disease-ap91.vercel.app/)
+**Live Demo:** [https://cardio-disease-ap91.vercel.app/](https://cardio-disease-machinelerning.vercel.app/)
 
 ## Project Structure
 
